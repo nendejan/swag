@@ -1,14 +1,24 @@
 package com.nendejan.swag.controllers;
 
+import com.nendejan.swag.models.Shift;
 import com.nendejan.swag.models.Employee;
-import com.nendejan.swag.models.data.DayDao;
+import com.nendejan.swag.models.EmployeeCategory;
+import com.nendejan.swag.models.Schedule;
+import com.nendejan.swag.models.data.ShiftDao;
+import com.nendejan.swag.models.data.EmployeeCategoryDao;
 import com.nendejan.swag.models.data.EmployeeDao;
 import com.nendejan.swag.models.data.ScheduleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
  * Created by nico on 6/30/2017.
@@ -25,7 +35,10 @@ public class EmployeeController {
     private ScheduleDao scheduleDao;
 
     @Autowired
-    private DayDao dayDao;
+    private ShiftDao shiftDao;
+
+    @Autowired
+    private EmployeeCategoryDao employeeCategoryDao;
 
     @RequestMapping(value="")
     public String index(Model model) {
@@ -41,10 +54,50 @@ public class EmployeeController {
 
         model.addAttribute("title", "Add Employee");
         model.addAttribute(new Employee());
+        model.addAttribute("employeeRoleSelection", "Choose Employee Role");
+        model.addAttribute("employeeCategories", employeeCategoryDao.findAll());
+        model.addAttribute("shiftAvailability", shiftDao.findAll());
 
-        //TODO Stopped here.
         return "employee/add";
     }
+
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String processAddEmployeeForm(@ModelAttribute @Valid Employee newEmployee,
+                                         Errors errors, @RequestParam int employeeCategoryId, @RequestParam ArrayList<Shift> shiftsAvailable, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Employee");
+            return "employee/add";
+        }
+        //setting emp availability
+        newEmployee.setAvailability(shiftsAvailable);
+
+            //setting emp role
+        EmployeeCategory cat = employeeCategoryDao.findOne(employeeCategoryId);
+        newEmployee.setEmployeeCategory(cat);
+        employeeDao.save(newEmployee);
+
+        return "redirect:";
+
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveEmployeeForm(Model model) {
+        model.addAttribute("employees", employeeDao.findAll());
+        model.addAttribute("title", "Remove Employee");
+        return "employee/remove";
+    }
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveEmployeeForm(@RequestParam int[] employeeIds) {
+
+        for (int employeeId : employeeIds) {
+            employeeDao.delete(employeeId);
+        }
+
+        return "redirect:";
+    }
+
 
 
 

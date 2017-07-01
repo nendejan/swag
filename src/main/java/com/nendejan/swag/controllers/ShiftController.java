@@ -6,5 +6,5 @@ import org.springframework.stereotype.Controller;
  * Created by nico on 6/30/2017.
  */
 @Controller
-public class DayController {
+public class ShiftController {
 }

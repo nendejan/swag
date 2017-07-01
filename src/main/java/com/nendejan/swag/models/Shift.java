@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by nico on 6/30/2017.
  */
-public class Day {
+public class Shift {
 
     @Id
     private int id;
@@ -18,18 +18,18 @@ public class Day {
     private Date date;
     private int laborHours;
     private int laborCost;
-    private ArrayList<Employee> employeesOfDay;
+    private ArrayList<Employee> employeesOfShift;
 
-    public Day(int id, String name, Date date, int laborHours, int laborCost, ArrayList<Employee> employeesOfDay) {
+    public Shift(int id, String name, Date date, int laborHours, int laborCost, ArrayList<Employee> employeesOfShift) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.laborHours = laborHours;
         this.laborCost = laborCost;
-        this.employeesOfDay = employeesOfDay;
+        this.employeesOfShift = employeesOfShift;
     }
 
-    public Day() {
+    public Shift() {
     }
 
     public int getId() {
@@ -64,11 +64,11 @@ public class Day {
         this.laborCost = laborCost;
     }
 
-    public ArrayList<Employee> getEmployeesOfDay() {
-        return employeesOfDay;
+    public ArrayList<Employee> getEmployeesOfShift() {
+        return employeesOfShift;
     }
 
-    public void setEmployeesOfDay(ArrayList<Employee> employeesOfDay) {
-        this.employeesOfDay = employeesOfDay;
+    public void setEmployeesOfShift(ArrayList<Employee> employeesOfShift) {
+        this.employeesOfShift = employeesOfShift;
     }
 }

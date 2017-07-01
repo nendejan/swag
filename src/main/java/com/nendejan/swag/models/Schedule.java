@@ -14,12 +14,12 @@ public class Schedule {
     @Id
     private int id;
     private Period scheduleDates;
-    private ArrayList<Day> daysOfWeek;
+    private ArrayList<Shift> shiftsOfWeek;
     private ArrayList<Employee> employeesOfWeek;
 
-    public Schedule(Period scheduleDates, ArrayList<Day> daysOfWeek, ArrayList<Employee> employeesOfWeek) {
+    public Schedule(Period scheduleDates, ArrayList<Shift> shiftsOfWeek, ArrayList<Employee> employeesOfWeek) {
         this.scheduleDates = scheduleDates;
-        this.daysOfWeek = daysOfWeek;
+        this.shiftsOfWeek = shiftsOfWeek;
         this.employeesOfWeek = employeesOfWeek;
     }
 
@@ -34,12 +34,12 @@ public class Schedule {
         return scheduleDates;
     }
 
-    public ArrayList<Day> getDaysOfWeek() {
-        return daysOfWeek;
+    public ArrayList<Shift> getShiftsOfWeek() {
+        return shiftsOfWeek;
     }
 
-    public void setDaysOfWeek(ArrayList<Day> daysOfWeek) {
-        this.daysOfWeek = daysOfWeek;
+    public void setShiftsOfWeek(ArrayList<Shift> shiftsOfWeek) {
+        this.shiftsOfWeek = shiftsOfWeek;
     }
 
     public ArrayList<Employee> getEmployeesOfWeek() {
