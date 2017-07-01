@@ -13,7 +13,7 @@ public class Shift {
     @Id
     private int id;
 
-    @NotNull
+
     private String name;
     private Date date;
     private int laborHours;

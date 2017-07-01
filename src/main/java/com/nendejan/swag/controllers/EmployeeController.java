@@ -56,7 +56,7 @@ public class EmployeeController {
         model.addAttribute(new Employee());
         model.addAttribute("employeeRoleSelection", "Choose Employee Role");
         model.addAttribute("employeeCategories", employeeCategoryDao.findAll());
-        model.addAttribute("shiftAvailability", shiftDao.findAll());
+        model.addAttribute("shifts", shiftDao.findAll());
 
         return "employee/add";
     }
@@ -99,7 +99,7 @@ public class EmployeeController {
     }
 
 
-
+//TODO Create edit paths and methods to alter employee fields.
 
 
 
