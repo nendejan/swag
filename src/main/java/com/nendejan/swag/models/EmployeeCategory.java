@@ -1,6 +1,8 @@
 package com.nendejan.swag.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,8 @@ public class EmployeeCategory {
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Size(min = 2, message = "Category must have a name.")
     private String name;
 
     public EmployeeCategory() {

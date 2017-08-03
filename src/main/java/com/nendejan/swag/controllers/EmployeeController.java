@@ -62,8 +62,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddEmployeeForm(@ModelAttribute @Valid Employee newEmployee,
-                                         Errors errors, @RequestParam int employeeCategoryId, @RequestParam ArrayList<Shift> shiftsAvailable, Model model) {
+    public String processAddEmployeeForm(@ModelAttribute @Valid Employee newEmployee, Errors errors, @RequestParam int employeeCategoryId, @RequestParam ArrayList<Shift> shiftsAvailable, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Employee");

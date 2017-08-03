@@ -16,15 +16,16 @@
     </tr>
 
     <tr th:each="employee : ${employees}">
-        <td th:text="$employee.name}"></td>
+        <td th:text="${employee.name}"></td>
         <td th:text="${employee.phoneNumber}"></td>
         <td th:text="${employee.email}"></td>
     </tr>
 
 </table>
 
-<a th:href="@{employee/add}">Add</a> |
-<a th:href="@{employee/remove}">Remove</a>
+<a th:href="@{employee/add}">Add Employee</a> |
+<a th:href="@{employee/remove}">Remove Employee</a> |
+<a th:href="@{employee/edit}">Edit Employee</a>
 
 </body>
 </html>

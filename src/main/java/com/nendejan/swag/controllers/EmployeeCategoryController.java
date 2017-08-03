@@ -17,7 +17,7 @@ import javax.validation.Valid;
  * Created by nico on 7/1/2017.
  */
 @Controller
-@RequestMapping("category")
+@RequestMapping("employeeCategory")
 public class EmployeeCategoryController {
 
     @Autowired
@@ -32,22 +32,23 @@ public class EmployeeCategoryController {
         model.addAttribute("categories", employeeCategoryDao.findAll());
         model.addAttribute("title", "Employee Categories");
 
-        return "category/index";
+        return "employeeCategory/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String add(Model model) {
+    public String displayAddCategoryForm(Model model) {
 
         model.addAttribute("title", " Add Category");
-        model.addAttribute("category", new EmployeeCategory());
-        return "category/add";
+        model.addAttribute(new EmployeeCategory());
+        return "employeeCategory/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid EmployeeCategory employeeCategory, Errors errors){
+    public String processAddCategoryForm(Model model, @ModelAttribute @Valid EmployeeCategory employeeCategory, Errors errors){
 
         if (errors.hasErrors()) {
-            return "category/add";
+            model.addAttribute("title", "Add Category");
+            return "employeeCategory/add";
         }
 
         employeeCategoryDao.save(employeeCategory);
