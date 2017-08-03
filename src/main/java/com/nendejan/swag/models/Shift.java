@@ -1,6 +1,6 @@
 package com.nendejan.swag.models;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +8,7 @@ import java.util.Date;
 /**
  * Created by nico on 6/30/2017.
  */
+@Entity
 public class Shift {
 
     @Id

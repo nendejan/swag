@@ -1,6 +1,8 @@
 package com.nendejan.swag.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nico on 7/1/2017.
@@ -10,15 +12,21 @@ import javax.persistence.*;
 public class EmployeeCategory {
 
     @Id
+    @GeneratedValue
     private int id;
+
     private String name;
+
+    public EmployeeCategory() {
+    }
 
     public EmployeeCategory(String name) {
         this.name = name;
     }
 
-    public EmployeeCategory() {
-    }
+    @OneToMany
+    @JoinColumn(name = "category_id")
+    private List<Employee> employees = new ArrayList<>();
 
     public int getId() {
         return id;

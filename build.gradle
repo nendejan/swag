@@ -13,8 +13,10 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+jar {
 
-version = '0.0.1-SNAPSHOT'
+	version = '0.0.1-SNAPSHOT'
+}
 sourceCompatibility = 1.8
 
 repositories {
@@ -23,6 +25,10 @@ repositories {
 
 
 dependencies {
+	compile('org.hibernate:hibernate-core:5.2.10.Final')
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
+	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.7.Final'
+
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -30,4 +36,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
+}
+bootRun {
+	addResources = true
 }

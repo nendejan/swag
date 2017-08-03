@@ -18,11 +18,12 @@ public class Employee {
     private int id;
 
 
-    @Size(min = 2, message = "Emplyee must have a name.")
+    @Size(min = 2, message = "Employee must have a name.")
     private String name;
 
 
     private int wage;
+    @ManyToOne
     private EmployeeCategory employeeCategory;
     //TODO Ask should this be public? Should I create a public method to adjust/set availability instead? Does that belong in the controller/class/can or should the DAO do it?
     public ArrayList<Shift> availability;
@@ -32,12 +33,15 @@ public class Employee {
     private int swagAmount;
     private int hoursWorked;
 
-    public Employee(String name, int wage, ArrayList<Shift> availability, int phoneNumber, String email) {
+
+
+    public Employee(String name, int wage, ArrayList<Shift> availability, int phoneNumber, String email, EmployeeCategory employeeCategory) {
         this.name = name;
         this.wage = wage;
         this.availability = availability;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.employeeCategory = employeeCategory;
     }
 
     public Employee() {
