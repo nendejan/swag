@@ -4,8 +4,20 @@
 
 <body class="container">
 
-<h1 th:text="">Default Title</h1>
+<h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
+
+
+<form method="post">
+
+    <div th:each="employeeCategory : ${categories}" class="checkbox">
+        <input type="checkbox" name="employeeCategoryIds" th:value="${employeeCategory.id}" th:id="${employeeCategory.id}"/>
+        <label th:for="${employeeCategory.id}" th:text="${employeeCategory.name}"></label>
+        <br />
+    </div>
+
+    <input type="submit" value="Remove Category" />
+</form>
 
 </body>
 </html>

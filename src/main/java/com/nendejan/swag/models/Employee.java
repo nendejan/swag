@@ -24,7 +24,7 @@ public class Employee {
 
     private int wage;
     @ManyToOne
-    private EmployeeCategory employeeCategory;
+   private EmployeeCategory employeeCategory;
     //TODO Ask should this be public? Should I create a public method to adjust/set availability instead? Does that belong in the controller/class/can or should the DAO do it?
     public ArrayList<Shift> availability;
 

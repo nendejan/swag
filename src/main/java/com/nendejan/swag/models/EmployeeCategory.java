@@ -28,8 +28,8 @@ public class EmployeeCategory {
         this.name = name;
     }
 
-    @OneToMany
-    @JoinColumn(name = "category_id")
+   @OneToMany
+   @JoinColumn(name = "category_id")
     private List<Employee> employees = new ArrayList<>();
 
     public int getId() {
