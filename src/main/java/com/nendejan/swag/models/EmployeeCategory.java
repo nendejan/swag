@@ -15,6 +15,8 @@ public class EmployeeCategory {
 
     @Id
     @GeneratedValue
+    @NotNull
+    @Column(name="id", unique=true)
     private int id;
 
     @NotNull
@@ -42,5 +44,13 @@ public class EmployeeCategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

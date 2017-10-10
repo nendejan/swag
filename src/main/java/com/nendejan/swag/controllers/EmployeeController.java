@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.ArrayList;
 
+
 /**
  * Created by nico on 6/30/2017.
  */
@@ -62,16 +63,12 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddEmployeeForm(@ModelAttribute @Valid Employee newEmployee, Errors errors, @RequestParam int employeeCategoryId, @RequestParam ArrayList<Shift> shiftsAvailable, Model model) {
+    public String processAddEmployeeForm(@ModelAttribute @Valid Employee newEmployee, Errors errors, @RequestParam int employeeCategoryId, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Employee");
             return "employee/add";
         }
-        //setting emp availability
-        newEmployee.setAvailability(shiftsAvailable);
-
-            //setting emp role
         EmployeeCategory cat = employeeCategoryDao.findOne(employeeCategoryId);
         newEmployee.setEmployeeCategory(cat);
         employeeDao.save(newEmployee);

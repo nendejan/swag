@@ -30,6 +30,7 @@ public class EmployeeCategoryController {
 
     @RequestMapping(value="")
     public String index(Model model){
+
         model.addAttribute("categories", employeeCategoryDao.findAll());
         model.addAttribute("title", "Employee Categories");
 
@@ -37,7 +38,7 @@ public class EmployeeCategoryController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String add(Model model) {
+    public String displayAddCategoryForm(Model model) {
 
         model.addAttribute("title", " Add Category");
         model.addAttribute("employeeCategory", new EmployeeCategory());
@@ -45,7 +46,7 @@ public class EmployeeCategoryController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid EmployeeCategory employeeCategory, Errors errors){
+    public String processAddCategoryForm(Model model, @ModelAttribute @Valid EmployeeCategory employeeCategory, Errors errors){
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Category");

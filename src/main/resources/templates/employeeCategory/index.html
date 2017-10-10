@@ -5,7 +5,7 @@
 <body class="container">
 
 <h1 th:text="${title}">Default Title</h1>
-<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: navigationEmployeeCategory"></nav>
 
 
 
@@ -16,8 +16,8 @@
 
 </ul>
 
-<a th:href="@{employeeCategory/add}">Add Category</a> |
-<a th:href="@{employeeCategory/remove}">Remove Category</a> |
-<a th:href="@{employeeCategory/edit}">Edit Category</a>
+
+
+<footer th:replace="fragments :: navigationFooter"></footer>
 </body>
 </html>

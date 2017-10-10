@@ -1,8 +1,11 @@
 package com.nendejan.swag.models;
 
+import com.nendejan.swag.models.Shift;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nico on 6/30/2017.
@@ -12,41 +15,42 @@ import java.util.ArrayList;
 public class Schedule {
 
     @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name="id", unique=true)
     private int id;
-    private Period scheduleDates;
-    private ArrayList<Shift> shiftsOfWeek;
-    private ArrayList<Employee> employeesOfWeek;
 
-    public Schedule(Period scheduleDates, ArrayList<Shift> shiftsOfWeek, ArrayList<Employee> employeesOfWeek) {
-        this.scheduleDates = scheduleDates;
-        this.shiftsOfWeek = shiftsOfWeek;
-        this.employeesOfWeek = employeesOfWeek;
-    }
+    private String scheduleDates;
+
+    @ManyToMany
+    private List<Shift> shiftsOfWeek = new ArrayList<>();
 
     public Schedule() {
     }
+    public Schedule(String scheduleDates, List<Shift> shiftsOfWeek) {
+        this.scheduleDates = scheduleDates;
+
+
+    }
+
+    public void addShift(Shift shift){
+        shiftsOfWeek.add(shift);}
 
     public int getId() {
         return id;
     }
 
-    public Period getScheduleDates() {
+    public String getScheduleDates() {
         return scheduleDates;
     }
 
-    public ArrayList<Shift> getShiftsOfWeek() {
+    public List<Shift> getShiftsOfWeek() {
         return shiftsOfWeek;
     }
 
-    public void setShiftsOfWeek(ArrayList<Shift> shiftsOfWeek) {
+    public void setShiftsOfWeek(List<Shift> shiftsOfWeek) {
         this.shiftsOfWeek = shiftsOfWeek;
     }
 
-    public ArrayList<Employee> getEmployeesOfWeek() {
-        return employeesOfWeek;
-    }
 
-    public void setEmployeesOfWeek(ArrayList<Employee> employeesOfWeek) {
-        this.employeesOfWeek = employeesOfWeek;
-    }
 }

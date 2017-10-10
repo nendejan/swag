@@ -5,7 +5,7 @@
 <body class="container">
 
 <h1 th:text="${title}">Default Title</h1>
-<nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: navigationEmployee"></nav>
 
 <table class="table">
 
@@ -22,10 +22,6 @@
     </tr>
 
 </table>
-
-<a th:href="@{employee/add}">Add Employee</a> |
-<a th:href="@{employee/remove}">Remove Employee</a> |
-<a th:href="@{employee/edit}">Edit Employee</a>
-
+<footer th:replace="fragments :: navigationFooter"></footer>
 </body>
 </html>

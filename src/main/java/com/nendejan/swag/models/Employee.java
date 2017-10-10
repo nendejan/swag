@@ -2,10 +2,14 @@ package com.nendejan.swag.models;
 
 
 
+
 import javax.persistence.*;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nico on 6/30/2017.
@@ -15,30 +19,40 @@ import java.util.ArrayList;
 public class Employee {
 
     @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name="id", unique=true)
     private int id;
 
-
+    @NotNull
     @Size(min = 2, message = "Employee must have a name.")
     private String name;
 
-
+    @NotNull
     private int wage;
+
+
     @ManyToOne
-   private EmployeeCategory employeeCategory;
-    //TODO Ask should this be public? Should I create a public method to adjust/set availability instead? Does that belong in the controller/class/can or should the DAO do it?
-    public ArrayList<Shift> availability;
+    private EmployeeCategory employeeCategory;
+
+    @ManyToOne
+    public Schedule schedule;
+
+    @ManyToMany (mappedBy = "employees")
+    private List<Shift> availability = new ArrayList<>();
 
     private int phoneNumber;
     private String email;
     private int swagAmount;
-    private int hoursWorked;
+    private int hoursWorkedInShift;
+    private int hoursWorkedInSchedule;
 
 
 
-    public Employee(String name, int wage, ArrayList<Shift> availability, int phoneNumber, String email, EmployeeCategory employeeCategory) {
+    public Employee(String name, int wage, int phoneNumber, String email, EmployeeCategory employeeCategory) {
+
         this.name = name;
         this.wage = wage;
-        this.availability = availability;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.employeeCategory = employeeCategory;
@@ -68,14 +82,6 @@ public class Employee {
         this.wage = wage;
     }
 
-    public ArrayList<Shift> getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(ArrayList<Shift> availability) {
-        this.availability = availability;
-    }
-
     public int getSwagAmount() {
         return swagAmount;
     }
@@ -84,13 +90,23 @@ public class Employee {
         this.swagAmount = swagAmount;
     }
 
-    public int getHoursWorked() {
-        return hoursWorked;
+    public int getHoursWorkedInShift() {
+        return hoursWorkedInShift;
     }
 
-    public void setHoursWorked(int hoursWorked) {
-        this.hoursWorked = hoursWorked;
+    public void setHoursWorkedInShift(int hoursWorkedInShift) {
+        this.hoursWorkedInShift = hoursWorkedInShift;
     }
+
+
+    public int getHoursWorkedInSchedule() {
+        return hoursWorkedInSchedule;
+    }
+
+    public void setHoursWorkedInSchedule(int hoursWorkedInSchedule) {
+        this.hoursWorkedInSchedule = hoursWorkedInSchedule;
+    }
+
 
     public EmployeeCategory getEmployeeCategory() { return employeeCategory; }
 
@@ -103,4 +119,13 @@ public class Employee {
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
 }
